@@ -1,0 +1,7 @@
+extends: airbnb
+parser: babel-eslint
+rules:
+  arrow-body-style: off
+  comma-dangle:
+    - error
+    - never

@@ -1,0 +1,31 @@
+{
+  "name": "zapp-desktop",
+  "version": "0.1.0",
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-eslint": "^8.2.6",
+    "babel-preset-env": "^1.7.0",
+    "eslint": "^5.3.0",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-jsx-a11y": "^6.1.1",
+    "eslint-plugin-react": "^7.11.1",
+    "serve": "^9.6.0"
+  },
+  "scripts": {
+    "build": "mkdir lib ; mkdir lib/actions ; ./node_modules/.bin/babel src -d lib ; cd lib ; rm -rf node_modules/ ; npm install ; rm -rf package-lock.json ; cd .. ; mkdir build ; rm build/zapp-desktop.zip; cd lib ; zip -r -X ../build/zapp-desktop.zip .",
+    "postinstall": "npm link @zappjs/core @zappjs/project",
+    "start-serve": "serve build",
+    "start": "node lib"
+  },
+  "dependencies": {
+    "bluebird": "^3.5.1",
+    "body-parser": "^1.18.3",
+    "express": "^4.16.3",
+    "fs-extra": "^7.0.0",
+    "glob": "^7.1.2",
+    "js-yaml": "^3.12.0",
+    "lodash": "^4.17.10",
+    "uuid": "^3.3.2"
+  }
+}
