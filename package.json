@@ -2,6 +2,8 @@
   "name": "zapp-desktop",
   "version": "0.1.0",
   "devDependencies": {
+    "@zappjs/core": "^0.1.0",
+    "@zappjs/project": "^0.1.0",
     "babel-cli": "^6.26.0",
     "babel-eslint": "^8.2.6",
     "babel-preset-env": "^1.7.0",
@@ -13,9 +15,7 @@
     "serve": "^9.6.0"
   },
   "scripts": {
-    "build": "mkdir lib ; mkdir lib/actions ; ./node_modules/.bin/babel src -d lib ; cd lib ; rm -rf node_modules/ ; npm install ; rm -rf package-lock.json ; cd .. ; mkdir build ; rm build/zapp-desktop.zip; cd lib ; zip -r -X ../build/zapp-desktop.zip .",
-    "postinstall": "npm link @zappjs/core @zappjs/project",
-    "start-serve": "serve build",
+    "build": "mkdir lib ; mkdir lib/actions ; ./node_modules/.bin/babel src -d lib",
     "start": "node lib"
   },
   "dependencies": {
