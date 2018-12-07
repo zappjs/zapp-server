@@ -1,0 +1,4 @@
+username:
+  generator-test:
+    path: ./src/tests/data/basic-generator
+    version: master

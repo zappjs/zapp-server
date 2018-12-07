@@ -1,11 +1,11 @@
-import fs from 'fs-extra';
-import path from 'path';
+import * as fs from 'fs-extra';
+import * as path from 'path';
 
-export default function writeFiles({ body }) {
+export function writeFiles({ body }: any) {
   console.log('writeFiles');
   // console.log(body);
 
-  (body.files || []).forEach((file) => {
+  (body.files || []).forEach((file: any) => {
     const filePath = path.normalize(`${body.cwd}/${file.path}`);
     const fileDir = path.dirname(filePath);
     if (!fs.existsSync(fileDir)) {
