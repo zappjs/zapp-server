@@ -10,6 +10,8 @@
     "@types/lodash": "^4.14.119",
     "@types/mocha": "^5.2.5",
     "@types/uuid": "^3.4.4",
+    "@zappjs/core": "^0.1.2",
+    "@zappjs/project": "^0.1.3",
     "axios": "^0.18.0",
     "mocha": "^5.2.0",
     "ts-node": "^7.0.1",
@@ -17,9 +19,8 @@
   },
   "scripts": {
     "build": "tsc",
-    "postinstall": "npm link @zappjs/core @zappjs/project",
-    "start": "node dist",
-    "test": "mocha -r ts-node/register ./src/**/*.spec.ts",
+    "start": "node dist/scripts/start",
+    "test": "mocha -r ts-node/register src/**/*.spec.ts",
     "watch": "tsc -w"
   },
   "dependencies": {

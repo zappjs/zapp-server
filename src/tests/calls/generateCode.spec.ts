@@ -3,7 +3,7 @@ import axios from 'axios';
 import * as fs from 'fs';
 import { Server } from 'http';
 
-import init from '../..';
+import { init } from '../..';
 
 describe('generateCode', () => {
     let server: Server;

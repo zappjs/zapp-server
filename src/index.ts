@@ -43,7 +43,7 @@ function handler(method: any) {
   };
 }
 
-export default async function init(cb?: Function) {
+export async function init(cb?: Function) {
   const app = express();
 
   app.use(bodyParser.json({ limit: '50mb' }));

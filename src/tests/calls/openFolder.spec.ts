@@ -2,7 +2,7 @@ import * as assert from 'assert';
 import axios from 'axios';
 import { Server } from 'http';
 
-import init from '../..';
+import { init } from '../..';
 
 describe.skip('openFolder', () => {
     let server: Server;

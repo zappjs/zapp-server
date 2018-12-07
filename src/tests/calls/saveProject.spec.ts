@@ -4,7 +4,7 @@ import * as fs from 'fs-extra';
 import { Server } from 'http';
 import * as yaml from 'js-yaml';
 
-import init from '../..';
+import { init } from '../..';
 
 describe('saveProject', () => {
     let server: Server;
