@@ -2,14 +2,43 @@ import * as _ from 'lodash';
 import * as fs from 'fs-extra';
 import * as glob from 'glob-promise';
 import * as path from 'path';
+import * as validator from 'is-my-json-valid';
 import * as yaml from 'js-yaml';
 
-import { UninitializedError } from '../errors';
+import { InvalidError, NotFoundError, UninitializedError } from '../errors';
 
-export async function loadProject({ body }: any) {
+interface IBody {
+  cwd: string;
+}
+
+export async function loadProject({ body }: { body: IBody }) {
+  const validate = validator({
+    type: 'object',
+    properties: {
+      cwd: {
+        required: true,
+        type: 'string'
+      }
+    }
+  });
+
+  const isValid = validate(body);
+
+  if (!isValid) {
+    throw new InvalidError(
+      `"${validate.errors[0].field.substr(5)}" ${validate.errors[0].message}`
+    );
+  }
+
   let project = {};
 
-  const zappDir = path.normalize(`${body.cwd}/.zapp`);
+  const cwd = path.normalize(body.cwd);
+
+  if (!fs.existsSync(cwd)) {
+    throw new NotFoundError('Directory not found');
+  }
+
+  const zappDir = path.normalize(`${cwd}/.zapp`);
 
   if (!fs.existsSync(zappDir)) {
     throw new UninitializedError();
