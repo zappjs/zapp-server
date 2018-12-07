@@ -1,11 +1,9 @@
 import * as _ from 'lodash';
 import * as fs from 'fs-extra';
-import * as glob from 'glob-promise';
 import * as path from 'path';
 import * as validator from 'is-my-json-valid';
-import * as yaml from 'js-yaml';
 
-import { InvalidError, NotFoundError, UninitializedError } from '../errors';
+import { InitializedError, InvalidError, NotFoundError } from '../errors';
 
 import { isDirectory } from '../lib';
 
@@ -13,7 +11,7 @@ interface IBody {
   cwd: string;
 }
 
-export async function loadProject({ body }: { body: IBody }) {
+export async function initialize({ body }: { body: IBody }) {
   const validate = validator({
     type: 'object',
     properties: {
@@ -48,30 +46,11 @@ export async function loadProject({ body }: { body: IBody }) {
 
   const zappDir = path.normalize(`${cwd}/.zapp`);
 
-  if (!fs.existsSync(zappDir)) {
-    throw new UninitializedError();
+  if (fs.existsSync(zappDir)) {
+    throw new InitializedError();
   }
 
-  const items = await glob(
-    '.zapp/**/*',
-    {
-      cwd: body.cwd,
-      dot: true,
-      nodir: true
-    }
-  );
-
-  items.forEach((item: string) => {
-    const itemPathParts = item.replace(/\.ya?ml$/, '').split('/');
-    const itemPath = path.normalize(`${body.cwd}/${item}`);
-    const itemValue = fs.readFileSync(itemPath, 'utf8');
-
-    if (/\.ya?ml$/.test(item)) {
-      project = _.set(project, itemPathParts.slice(1), yaml.safeLoad(itemValue));
-    } else {
-      project = _.set(project, itemPathParts.slice(1), itemValue);
-    }
-  });
+  fs.mkdirSync(zappDir);
   
   return {
     body: {

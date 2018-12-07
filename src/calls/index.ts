@@ -1,4 +1,5 @@
 export * from './generateCode';
+export * from './initialize';
 export * from './listFiles';
 export * from './loadFile';
 export * from './loadImports';

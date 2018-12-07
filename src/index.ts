@@ -4,6 +4,7 @@ import { Request, Response } from 'express';
 
 import {
   generateCode,
+  initialize,
   listFiles,
   loadFile,
   loadImports,
@@ -64,6 +65,7 @@ export async function init(cb?: Function) {
   });
 
   app.post('/generateCode', handler(generateCode));
+  app.post('/initialize', handler(initialize));
   app.post('/listFiles', handler(listFiles));
   app.post('/loadFile', handler(loadFile));
   app.post('/loadImports', handler(loadImports));
