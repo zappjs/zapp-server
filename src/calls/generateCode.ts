@@ -3,7 +3,9 @@ import { dirname, normalize } from 'path';
 import zapp from '@zappjs/core';
 
 export async function generateCode({ body }: any) {
-  const data: any = {};
+  const data: any = {
+    files: {}
+  };
 
   // generate items
   const items = zapp(body.project);
@@ -12,6 +14,8 @@ export async function generateCode({ body }: any) {
   items.forEach((item: any) => {
     const itemPath = normalize(`${body.cwd}/${item.path}`);
     if (item.type === 'file') {
+      data.files[item.path] = item.content;
+
       const parentPath = dirname(itemPath);
       if (!existsSync(parentPath)) {
         mkdirpSync(parentPath);
