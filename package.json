@@ -18,7 +18,7 @@
     "typescript": "^3.2.1"
   },
   "scripts": {
-    "build": "tsc",
+    "build": "tsc && rm -rf build/alpha && mkdir -p build/alpha && zip -r build/alpha/zapp-server.zip dist node_modules -x \"*.DS_Store\"",
     "start": "node dist/scripts/start",
     "test": "mocha -r ts-node/register src/**/*.spec.ts",
     "watch": "tsc -w"
